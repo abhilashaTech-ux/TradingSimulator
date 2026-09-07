@@ -1,4 +1,4 @@
-const API_URL = https://trading-simulator-backend-x6qz.onrender.com/;
+const API_URL = "https://trading-simulator-backend.onrender.com";
 
 
 // ==========================================
