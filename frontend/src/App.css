@@ -1,0 +1,364 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f7fb;
+  color: #1f2937;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+/* NAVBAR */
+
+.navbar {
+  background: #111827;
+  color: white;
+  padding: 18px 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar h2 {
+  margin: 0;
+}
+
+.navbar p {
+  margin: 5px 0 0;
+  font-size: 13px;
+  color: #cbd5e1;
+}
+
+.online-status {
+  font-size: 14px;
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  display: inline-block;
+  background: #22c55e;
+  border-radius: 50%;
+  margin-right: 7px;
+}
+
+/* HERO */
+
+.hero {
+  text-align: center;
+  padding: 55px 20px;
+  background: white;
+}
+
+.eyebrow {
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.hero h1 {
+  margin: 15px 0;
+  font-size: 34px;
+}
+
+.hero p {
+  color: #6b7280;
+}
+
+.primary-button,
+.run-button {
+  border: none;
+  background: #2563eb;
+  color: white;
+  padding: 13px 24px;
+  border-radius: 7px;
+  cursor: pointer;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.primary-button:hover,
+.run-button:hover {
+  background: #1d4ed8;
+}
+
+/* SECTION */
+
+.section {
+  width: 86%;
+  max-width: 1200px;
+  margin: 30px auto;
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-heading h2 {
+  margin: 0 0 7px;
+}
+
+.section-heading p {
+  margin: 0;
+  color: #6b7280;
+}
+
+.badge {
+  background: #e0e7ff;
+  color: #3730a3;
+  padding: 7px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.chart-container {
+  width: 100%;
+}
+
+/* STATS */
+
+.stats-grid {
+  width: 86%;
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(
+    3,
+    1fr
+  );
+  gap: 18px;
+}
+
+.stat-card,
+.result-card {
+  background: white;
+  padding: 22px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px
+    rgba(0, 0, 0, 0.05);
+}
+
+.stat-card span,
+.result-card span {
+  display: block;
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+
+.stat-card strong,
+.result-card strong {
+  display: block;
+  font-size: 22px;
+}
+
+.stat-card small {
+  color: #9ca3af;
+  display: block;
+  margin-top: 8px;
+}
+
+/* STRATEGY */
+
+.capital-box {
+  margin-bottom: 25px;
+}
+
+.capital-box label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.capital-box input {
+  width: 250px;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+}
+
+.rule-box {
+  border: 1px solid #e5e7eb;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 10px;
+}
+
+.rule-box h3 {
+  margin: 0 0 8px;
+}
+
+.rule-box p {
+  color: #6b7280;
+  margin-top: 0;
+}
+
+.rule-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    4,
+    1fr
+  );
+  gap: 12px;
+}
+
+.rule-grid select,
+.rule-grid input {
+  padding: 11px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.run-button {
+  width: 100%;
+  font-size: 16px;
+}
+
+/* RESULTS */
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    5,
+    1fr
+  );
+  gap: 15px;
+}
+
+.profit {
+  color: #16a34a;
+}
+
+.loss {
+  color: #dc2626;
+}
+
+/* TABLE */
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background: #f3f4f6;
+}
+
+th,
+td {
+  padding: 13px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.buy-tag,
+.sell-tag {
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.buy-tag {
+  color: #166534;
+  background: #dcfce7;
+}
+
+.sell-tag {
+  color: #991b1b;
+  background: #fee2e2;
+}
+
+/* FOOTER */
+
+footer {
+  margin-top: 50px;
+  background: #111827;
+  color: white;
+  text-align: center;
+  padding: 30px;
+}
+
+footer h3 {
+  margin: 0 0 8px;
+}
+
+footer p {
+  margin: 0;
+  color: #9ca3af;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .result-grid {
+    grid-template-columns: repeat(
+      2,
+      1fr
+    );
+  }
+
+  .rule-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    padding: 15px 5%;
+  }
+
+  .navbar h2 {
+    font-size: 20px;
+  }
+
+  .online-status {
+    display: none;
+  }
+
+  .section,
+  .stats-grid {
+    width: 94%;
+  }
+
+  .hero h1 {
+    font-size: 26px;
+  }
+
+  .rule-grid,
+  .result-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .capital-box input {
+    width: 100%;
+  }
+}
