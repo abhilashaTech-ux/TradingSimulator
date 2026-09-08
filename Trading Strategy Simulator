@@ -1,0 +1,19 @@
+Project Description:
+A web-based Trading Strategy Simulator that allows users to simulate market data and analyze trading strategies using technical indicators.
+
+Features:
+• Generate simulated market datasets
+• Visualize market trends using interactive charts
+• Test moving average and RSI-based trading strategies
+• Analyze trading performance using simulated data
+• User-friendly and responsive interface
+
+Technologies Used:
+Frontend: React, Vite
+Backend: Node.js, Express.js
+Deployment: Vercel
+Version Control: Git & GitHub
+
+Live Demo:
+https://trading-simulator-flame.vercel.app/
+https://trading-simulator-backend-x6qz.onrender.com/
