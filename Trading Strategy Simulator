@@ -1,19 +1,95 @@
-Project Description:
-A web-based Trading Strategy Simulator that allows users to simulate market data and analyze trading strategies using technical indicators.
+# 📈 TradeLab
 
-Features:
-• Generate simulated market datasets
-• Visualize market trends using interactive charts
-• Test moving average and RSI-based trading strategies
-• Analyze trading performance using simulated data
-• User-friendly and responsive interface
+## Trading Strategy Simulator
 
-Technologies Used:
-Frontend: React, Vite
-Backend: Node.js, Express.js
-Deployment: Vercel
-Version Control: Git & GitHub
+TradeLab is a full-stack trading strategy simulation platform that allows users to create, test, and analyze trading strategies using simulated market data.
 
-Live Demo:
-https://trading-simulator-flame.vercel.app/
-https://trading-simulator-backend-x6qz.onrender.com/
+Users can configure technical indicator-based BUY and SELL rules, run backtests, visualize trades on charts, analyze performance, and save their backtest history securely using Firebase.
+
+---
+
+## 🚀 Features
+
+- 🔐 User Authentication using Firebase
+- 📊 Simulated Market Data Generation
+- 📈 Interactive Trading Charts
+- 📉 Technical Indicators
+  - SMA 20
+  - SMA 50
+  - EMA 20
+  - RSI 14
+- 🟢 Custom BUY Rules
+- 🔴 Custom SELL Rules
+- ⚙️ Backend Backtesting Engine
+- 💰 Initial Capital Configuration
+- 📊 Performance Analysis
+- 📈 Profit and Loss Calculation
+- 📉 Return Percentage Calculation
+- 🟢 Winning and Losing Trade Analysis
+- 🛒 Trade History
+- 📍 BUY and SELL Markers on Chart
+- 💾 Save Backtest Results to Firebase Firestore
+- 📚 View Previously Saved Backtests
+- 🔄 Generate New Simulated Market Datasets
+- 🚪 User Logout Functionality
+
+---
+
+## 🛠️ Technologies Used
+
+### Frontend
+
+- React.js
+- Vite
+- JavaScript
+- CSS
+- Recharts
+
+### Backend
+
+- Node.js
+- Express.js
+- REST API
+- CORS
+
+### Database & Authentication
+
+- Firebase Authentication
+- Firebase Firestore
+
+---
+
+## 📂 Project Structure
+
+```text
+TradeLab/
+│
+├── frontend/
+│   │
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   │   └── Dashboard.jsx
+│   │   │
+│   │   ├── services/
+│   │   │   ├── firebase.js
+│   │   │   ├── authService.js
+│   │   │   └── firestoreService.js
+│   │   │
+│   │   ├── App.jsx
+│   │   └── App.css
+│   │
+│   └── package.json
+│
+├── backend/
+│   │
+│   ├── routes/
+│   │   └── backtest.js
+│   │
+│   ├── services/
+│   │   └── backtestEngine.js
+│   │
+│   ├── server.js
+│   └── package.json
+│
+└── README.md
