@@ -2,33 +2,29 @@ import { useState } from "react";
 import { runBacktest } from "../services/api";
 
 function StrategyBuilder({ onRun, marketData }) {
-  // Initial capital
   const [initialCapital, setInitialCapital] = useState(10000);
 
-  // BUY rule
+  // BUY RULE
   const [buyRule, setBuyRule] = useState({
     indicator: "SMA",
-    period: 50,
+    period: 20,
     condition: "cross_above",
+    compareWith: "SMA50",
     value: 70
   });
 
-  // SELL rule
+  // SELL RULE
   const [sellRule, setSellRule] = useState({
-    indicator: "RSI",
-    period: 14,
-    condition: "greater_than",
+    indicator: "SMA",
+    period: 20,
+    condition: "cross_below",
+    compareWith: "SMA50",
     value: 70
   });
 
-  // Backtest state
   const [result, setResult] = useState(null);
   const [running, setRunning] = useState(false);
   const [error, setError] = useState("");
-
-  // --------------------------------------------------
-  // UPDATE BUY RULE
-  // --------------------------------------------------
 
   function updateBuyRule(field, value) {
     setBuyRule((previous) => ({
@@ -37,10 +33,6 @@ function StrategyBuilder({ onRun, marketData }) {
     }));
   }
 
-  // --------------------------------------------------
-  // UPDATE SELL RULE
-  // --------------------------------------------------
-
   function updateSellRule(field, value) {
     setSellRule((previous) => ({
       ...previous,
@@ -48,24 +40,16 @@ function StrategyBuilder({ onRun, marketData }) {
     }));
   }
 
-  // --------------------------------------------------
-  // RUN BACKTEST
-  // --------------------------------------------------
-
   async function handleRun() {
     try {
       setRunning(true);
       setError("");
       setResult(null);
 
-      if (
-        !marketData || marketData.length === 0) {
-            setError(
-                "Market data is not available yet."
-            );
-            return;
-        }
-      
+      if (!marketData || marketData.length === 0) {
+        setError("Market data is not available yet.");
+        return;
+      }
 
       const strategy = {
         buyRule: {
@@ -81,6 +65,8 @@ function StrategyBuilder({ onRun, marketData }) {
         }
       };
 
+      console.log("Running strategy:", strategy);
+
       const data = await runBacktest(
         strategy,
         Number(initialCapital),
@@ -89,7 +75,6 @@ function StrategyBuilder({ onRun, marketData }) {
 
       setResult(data);
 
-      // Send strategy to parent component
       if (onRun) {
         onRun(
           strategy,
@@ -114,9 +99,7 @@ function StrategyBuilder({ onRun, marketData }) {
   return (
     <div className="strategy-card">
 
-      {/* ------------------------------------------------
-          INITIAL CAPITAL
-      ------------------------------------------------ */}
+      {/* INITIAL CAPITAL */}
 
       <div className="capital-box">
 
@@ -148,9 +131,7 @@ function StrategyBuilder({ onRun, marketData }) {
       </div>
 
 
-      {/* ------------------------------------------------
-          BUY RULE
-      ------------------------------------------------ */}
+      {/* BUY RULE */}
 
       <div className="rule-section">
 
@@ -173,7 +154,7 @@ function StrategyBuilder({ onRun, marketData }) {
 
         <div className="rule-grid">
 
-          {/* Indicator */}
+          {/* BUY INDICATOR */}
 
           <div className="form-field">
 
@@ -203,16 +184,12 @@ function StrategyBuilder({ onRun, marketData }) {
                 RSI
               </option>
 
-              <option value="Bollinger Bands">
-                Bollinger Bands
-              </option>
-
             </select>
 
           </div>
 
 
-          {/* Period */}
+          {/* BUY PERIOD */}
 
           <div className="form-field">
 
@@ -236,7 +213,7 @@ function StrategyBuilder({ onRun, marketData }) {
           </div>
 
 
-          {/* Condition */}
+          {/* BUY CONDITION */}
 
           <div className="form-field">
 
@@ -254,14 +231,6 @@ function StrategyBuilder({ onRun, marketData }) {
               }
             >
 
-              <option value="cross_above">
-                Cross Above
-              </option>
-
-              <option value="cross_below">
-                Cross Below
-              </option>
-
               <option value="greater_than">
                 Greater Than
               </option>
@@ -270,8 +239,24 @@ function StrategyBuilder({ onRun, marketData }) {
                 Less Than
               </option>
 
+              <option value="greater_than_or_equal">
+                Greater Than or Equal
+              </option>
+
+              <option value="less_than_or_equal">
+                Less Than or Equal
+              </option>
+
               <option value="equal_to">
                 Equal To
+              </option>
+
+              <option value="cross_above">
+                Cross Above
+              </option>
+
+              <option value="cross_below">
+                Cross Below
               </option>
 
             </select>
@@ -279,35 +264,80 @@ function StrategyBuilder({ onRun, marketData }) {
           </div>
 
 
-          {/* Value */}
+          {/* BUY COMPARE WITH */}
 
           <div className="form-field">
 
             <label>
-              Value
+              Compare With
             </label>
 
-            <input
-              type="number"
-              value={buyRule.value}
+            <select
+              value={buyRule.compareWith}
               onChange={(e) =>
                 updateBuyRule(
-                  "value",
+                  "compareWith",
                   e.target.value
                 )
               }
-            />
+            >
+
+              <option value="SMA20">
+                SMA 20
+              </option>
+
+              <option value="SMA50">
+                SMA 50
+              </option>
+
+              <option value="EMA20">
+                EMA 20
+              </option>
+
+              <option value="RSI14">
+                RSI 14
+              </option>
+
+              <option value="VALUE">
+                Fixed Value
+              </option>
+
+            </select>
 
           </div>
+
+
+          {/* BUY VALUE */}
+
+          {buyRule.compareWith === "VALUE" && (
+
+            <div className="form-field">
+
+              <label>
+                Value
+              </label>
+
+              <input
+                type="number"
+                value={buyRule.value}
+                onChange={(e) =>
+                  updateBuyRule(
+                    "value",
+                    e.target.value
+                  )
+                }
+              />
+
+            </div>
+
+          )}
 
         </div>
 
       </div>
 
 
-      {/* ------------------------------------------------
-          SELL RULE
-      ------------------------------------------------ */}
+      {/* SELL RULE */}
 
       <div className="rule-section">
 
@@ -330,7 +360,7 @@ function StrategyBuilder({ onRun, marketData }) {
 
         <div className="rule-grid">
 
-          {/* Indicator */}
+          {/* SELL INDICATOR */}
 
           <div className="form-field">
 
@@ -360,16 +390,12 @@ function StrategyBuilder({ onRun, marketData }) {
                 RSI
               </option>
 
-              <option value="Bollinger Bands">
-                Bollinger Bands
-              </option>
-
             </select>
 
           </div>
 
 
-          {/* Period */}
+          {/* SELL PERIOD */}
 
           <div className="form-field">
 
@@ -393,7 +419,7 @@ function StrategyBuilder({ onRun, marketData }) {
           </div>
 
 
-          {/* Condition */}
+          {/* SELL CONDITION */}
 
           <div className="form-field">
 
@@ -419,6 +445,18 @@ function StrategyBuilder({ onRun, marketData }) {
                 Less Than
               </option>
 
+              <option value="greater_than_or_equal">
+                Greater Than or Equal
+              </option>
+
+              <option value="less_than_or_equal">
+                Less Than or Equal
+              </option>
+
+              <option value="equal_to">
+                Equal To
+              </option>
+
               <option value="cross_above">
                 Cross Above
               </option>
@@ -427,8 +465,47 @@ function StrategyBuilder({ onRun, marketData }) {
                 Cross Below
               </option>
 
-              <option value="equal_to">
-                Equal To
+            </select>
+
+          </div>
+
+
+          {/* SELL COMPARE WITH */}
+
+          <div className="form-field">
+
+            <label>
+              Compare With
+            </label>
+
+            <select
+              value={sellRule.compareWith}
+              onChange={(e) =>
+                updateSellRule(
+                  "compareWith",
+                  e.target.value
+                )
+              }
+            >
+
+              <option value="SMA20">
+                SMA 20
+              </option>
+
+              <option value="SMA50">
+                SMA 50
+              </option>
+
+              <option value="EMA20">
+                EMA 20
+              </option>
+
+              <option value="RSI14">
+                RSI 14
+              </option>
+
+              <option value="VALUE">
+                Fixed Value
               </option>
 
             </select>
@@ -436,35 +513,37 @@ function StrategyBuilder({ onRun, marketData }) {
           </div>
 
 
-          {/* Value */}
+          {/* SELL VALUE */}
 
-          <div className="form-field">
+          {sellRule.compareWith === "VALUE" && (
 
-            <label>
-              Value
-            </label>
+            <div className="form-field">
 
-            <input
-              type="number"
-              value={sellRule.value}
-              onChange={(e) =>
-                updateSellRule(
-                  "value",
-                  e.target.value
-                )
-              }
-            />
+              <label>
+                Value
+              </label>
 
-          </div>
+              <input
+                type="number"
+                value={sellRule.value}
+                onChange={(e) =>
+                  updateSellRule(
+                    "value",
+                    e.target.value
+                  )
+                }
+              />
+
+            </div>
+
+          )}
 
         </div>
 
       </div>
 
 
-      {/* ------------------------------------------------
-          RUN BUTTON
-      ------------------------------------------------ */}
+      {/* RUN BUTTON */}
 
       <div className="run-section">
 
@@ -476,7 +555,7 @@ function StrategyBuilder({ onRun, marketData }) {
 
           {running
             ? "Running Backtest..."
-            : "▶ Run Backtest"}
+            : "▶️ Run Backtest"}
 
         </button>
 
@@ -488,24 +567,18 @@ function StrategyBuilder({ onRun, marketData }) {
       </div>
 
 
-      {/* ------------------------------------------------
-          ERROR
-      ------------------------------------------------ */}
+      {/* ERROR */}
 
       {error && (
 
         <div className="backtest-error">
-
           ⚠️ {error}
-
         </div>
 
       )}
 
 
-      {/* ------------------------------------------------
-          BACKTEST RESULT
-      ------------------------------------------------ */}
+      {/* RESULTS */}
 
       {result && (
 
@@ -517,8 +590,6 @@ function StrategyBuilder({ onRun, marketData }) {
 
 
           <div className="result-grid">
-
-            {/* Initial Capital */}
 
             <div className="result-item">
 
@@ -535,8 +606,6 @@ function StrategyBuilder({ onRun, marketData }) {
             </div>
 
 
-            {/* Final Value */}
-
             <div className="result-item">
 
               <span>
@@ -552,8 +621,6 @@ function StrategyBuilder({ onRun, marketData }) {
             </div>
 
 
-            {/* Profit Loss */}
-
             <div className="result-item">
 
               <span>
@@ -568,8 +635,6 @@ function StrategyBuilder({ onRun, marketData }) {
 
             </div>
 
-
-            {/* Return */}
 
             <div className="result-item">
 
@@ -587,8 +652,6 @@ function StrategyBuilder({ onRun, marketData }) {
             </div>
 
 
-            {/* Total Trades */}
-
             <div className="result-item">
 
               <span>
@@ -604,9 +667,7 @@ function StrategyBuilder({ onRun, marketData }) {
           </div>
 
 
-          {/* ------------------------------------------------
-              TRADE HISTORY PREVIEW
-          ------------------------------------------------ */}
+          {/* TRADE HISTORY */}
 
           {result.trades &&
             result.trades.length > 0 && (
@@ -648,7 +709,9 @@ function StrategyBuilder({ onRun, marketData }) {
                       </span>
 
                       <span>
-                        Qty: {trade.quantity}
+                        Qty: {Number(
+                          trade.quantity
+                        ).toFixed(4)}
                       </span>
 
                     </div>
@@ -661,6 +724,7 @@ function StrategyBuilder({ onRun, marketData }) {
             </div>
 
           )}
+
 
           {result.trades &&
             result.trades.length === 0 && (

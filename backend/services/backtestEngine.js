@@ -9,15 +9,11 @@ function calculateSMA(marketData, period) {
 
     let sum = 0;
 
-    for (
-      let j = i - period + 1;
-      j <= i;
-      j++
-    ) {
+    for (let j = i - period + 1; j <= i; j++) {
       sum += Number(marketData[j].close);
     }
 
-    result.push(sum / period);
+    result.push(Number((sum / period).toFixed(2)));
   }
 
   return result;
@@ -27,14 +23,12 @@ function calculateSMA(marketData, period) {
 function calculateEMA(marketData, period) {
   const result = [];
 
-  const multiplier =
-    2 / (period + 1);
+  const multiplier = 2 / (period + 1);
 
   let previousEMA = null;
 
   for (let i = 0; i < marketData.length; i++) {
-    const price =
-      Number(marketData[i].close);
+    const price = Number(marketData[i].close);
 
     if (i < period - 1) {
       result.push(null);
@@ -45,36 +39,31 @@ function calculateEMA(marketData, period) {
       let sum = 0;
 
       for (let j = 0; j < period; j++) {
-        sum += Number(
-          marketData[j].close
-        );
+        sum += Number(marketData[j].close);
       }
 
       previousEMA = sum / period;
 
-      result.push(previousEMA);
+      result.push(Number(previousEMA.toFixed(2)));
 
       continue;
     }
 
     const ema =
-      (price - previousEMA) *
-        multiplier +
+      (price - previousEMA) * multiplier +
       previousEMA;
 
     previousEMA = ema;
 
-    result.push(ema);
+    result.push(Number(ema.toFixed(2)));
   }
 
   return result;
 }
 
 
-function calculateRSI(marketData, period) {
-  const result = Array(
-    marketData.length
-  ).fill(null);
+function calculateRSI(marketData, period = 14) {
+  const result = Array(marketData.length).fill(null);
 
   if (marketData.length <= period) {
     return result;
@@ -101,12 +90,11 @@ function calculateRSI(marketData, period) {
   if (averageLoss === 0) {
     result[period] = 100;
   } else {
-    const rs =
-      averageGain / averageLoss;
+    const rs = averageGain / averageLoss;
 
-    result[period] =
-      100 -
-      100 / (1 + rs);
+    result[period] = Number(
+      (100 - 100 / (1 + rs)).toFixed(2)
+    );
   }
 
   for (
@@ -118,25 +106,20 @@ function calculateRSI(marketData, period) {
       Number(marketData[i].close) -
       Number(marketData[i - 1].close);
 
-    const gain =
-      change > 0 ? change : 0;
+    const gain = change > 0 ? change : 0;
 
     const loss =
-      change < 0
-        ? Math.abs(change)
-        : 0;
+      change < 0 ? Math.abs(change) : 0;
 
     averageGain =
       (
-        averageGain *
-          (period - 1) +
+        averageGain * (period - 1) +
         gain
       ) / period;
 
     averageLoss =
       (
-        averageLoss *
-          (period - 1) +
+        averageLoss * (period - 1) +
         loss
       ) / period;
 
@@ -144,12 +127,11 @@ function calculateRSI(marketData, period) {
       result[i] = 100;
     } else {
       const rs =
-        averageGain /
-        averageLoss;
+        averageGain / averageLoss;
 
-      result[i] =
-        100 -
-        100 / (1 + rs);
+      result[i] = Number(
+        (100 - 100 / (1 + rs)).toFixed(2)
+      );
     }
   }
 
@@ -157,36 +139,112 @@ function calculateRSI(marketData, period) {
 }
 
 
-function checkCondition(
+/*
+=========================================================
+NORMAL CONDITIONS
+=========================================================
+*/
+
+function checkNormalCondition(
   leftValue,
   condition,
   rightValue
 ) {
   if (
     leftValue === null ||
-    rightValue === null ||
     leftValue === undefined ||
+    rightValue === null ||
     rightValue === undefined
   ) {
     return false;
   }
 
   switch (condition) {
+    case "greater_than":
     case ">":
       return leftValue > rightValue;
 
+    case "less_than":
     case "<":
       return leftValue < rightValue;
 
+    case "greater_than_or_equal":
     case ">=":
       return leftValue >= rightValue;
 
+    case "less_than_or_equal":
     case "<=":
       return leftValue <= rightValue;
+
+    case "equal_to":
+    case "==":
+      return leftValue === rightValue;
 
     default:
       return false;
   }
+}
+
+
+/*
+=========================================================
+TRUE CROSSOVER DETECTION
+=========================================================
+
+Cross Above:
+
+Previous candle:
+LEFT <= RIGHT
+
+Current candle:
+LEFT > RIGHT
+
+
+Cross Below:
+
+Previous candle:
+LEFT >= RIGHT
+
+Current candle:
+LEFT < RIGHT
+=========================================================
+*/
+
+function checkCrossover(
+  previousLeft,
+  currentLeft,
+  previousRight,
+  currentRight,
+  condition
+) {
+  if (
+    previousLeft === null ||
+    previousLeft === undefined ||
+    currentLeft === null ||
+    currentLeft === undefined ||
+    previousRight === null ||
+    previousRight === undefined ||
+    currentRight === null ||
+    currentRight === undefined
+  ) {
+    return false;
+  }
+
+  if (condition === "cross_above") {
+    return (
+      previousLeft <= previousRight &&
+      currentLeft > currentRight
+    );
+  }
+
+  if (condition === "cross_below") {
+    return (
+      previousLeft >= previousRight &&
+      currentLeft < currentRight
+    );
+  }
+
+  return false;
 }
 
 
@@ -195,8 +253,7 @@ function runBacktest(
   initialCapital,
   marketData
 ) {
-  const capital =
-    Number(initialCapital);
+  const capital = Number(initialCapital);
 
   let cash = capital;
   let quantity = 0;
@@ -208,30 +265,38 @@ function runBacktest(
   let winningTrades = 0;
   let losingTrades = 0;
 
-  const sma20 =
-    calculateSMA(
-      marketData,
-      20
-    );
+  /*
+  ========================================================
+  INDICATORS
+  ========================================================
+  */
 
-  const sma50 =
-    calculateSMA(
-      marketData,
-      50
-    );
+  const sma20 = calculateSMA(
+    marketData,
+    20
+  );
 
-  const ema20 =
-    calculateEMA(
-      marketData,
-      20
-    );
+  const sma50 = calculateSMA(
+    marketData,
+    50
+  );
 
-  const rsi14 =
-    calculateRSI(
-      marketData,
-      14
-    );
+  const ema20 = calculateEMA(
+    marketData,
+    20
+  );
 
+  const rsi14 = calculateRSI(
+    marketData,
+    14
+  );
+
+
+  /*
+  ========================================================
+  GET INDICATOR VALUE
+  ========================================================
+  */
 
   function getValue(
     name,
@@ -255,45 +320,237 @@ function runBacktest(
       case "RSI14":
         return rsi14[index];
 
+      case "SMA":
+        /*
+        The StrategyBuilder can send SMA
+        with a period. For the existing
+        20/50 strategy options, use the
+        requested period.
+        */
+        return null;
+
+      case "EMA":
+        return null;
+
+      case "RSI":
+        return null;
+
       default:
         return null;
     }
   }
 
 
-  function evaluateRule(
+  /*
+  ========================================================
+  GET RULE INDICATOR VALUE
+  ========================================================
+  */
+
+  function getRuleValue(
     rule,
     index
   ) {
-    const leftValue =
-      getValue(
-        rule.indicator,
-        index
+    /*
+    StrategyBuilder can send:
+    SMA
+    EMA
+    RSI
+
+    Convert these into the corresponding
+    calculated indicator.
+    */
+
+    if (rule.indicator === "SMA") {
+      const period = Number(
+        rule.period || 20
       );
 
-    let rightValue;
+      if (period === 50) {
+        return sma50[index];
+      }
 
+      if (period === 20) {
+        return sma20[index];
+      }
+
+      /*
+      For unsupported custom periods,
+      calculate the SMA dynamically.
+      */
+
+      const customSMA =
+        calculateSMA(
+          marketData,
+          period
+        );
+
+      return customSMA[index];
+    }
+
+
+    if (rule.indicator === "EMA") {
+      const period = Number(
+        rule.period || 20
+      );
+
+      if (period === 20) {
+        return ema20[index];
+      }
+
+      const customEMA =
+        calculateEMA(
+          marketData,
+          period
+        );
+
+      return customEMA[index];
+    }
+
+
+    if (rule.indicator === "RSI") {
+      const period = Number(
+        rule.period || 14
+      );
+
+      if (period === 14) {
+        return rsi14[index];
+      }
+
+      const customRSI =
+        calculateRSI(
+          marketData,
+          period
+        );
+
+      return customRSI[index];
+    }
+
+
+    if (
+      rule.indicator === "CLOSE"
+    ) {
+      return Number(
+        marketData[index].close
+      );
+    }
+
+
+    /*
+    Fallback for already-normalized
+    indicator names.
+    */
+
+    return getValue(
+      rule.indicator,
+      index
+    );
+  }
+
+
+  /*
+  ========================================================
+  GET RIGHT SIDE OF RULE
+  ========================================================
+  */
+
+  function getRightValue(
+    rule,
+    index
+  ) {
     if (
       rule.compareWith ===
       "VALUE"
     ) {
-      rightValue =
-        Number(rule.value);
-    } else {
-      rightValue =
-        getValue(
-          rule.compareWith,
-          index
-        );
+      return Number(
+        rule.value
+      );
     }
 
-    return checkCondition(
-      leftValue,
-      rule.condition,
-      rightValue
+    return getValue(
+      rule.compareWith,
+      index
     );
   }
 
+
+  /*
+  ========================================================
+  EVALUATE RULE
+  ========================================================
+  */
+
+  function evaluateRule(
+    rule,
+    index
+  ) {
+    const currentLeft =
+      getRuleValue(
+        rule,
+        index
+      );
+
+    const currentRight =
+      getRightValue(
+        rule,
+        index
+      );
+
+
+    /*
+    A crossover requires
+    a previous candle.
+    */
+
+    if (
+      rule.condition ===
+        "cross_above" ||
+      rule.condition ===
+        "cross_below"
+    ) {
+      if (index === 0) {
+        return false;
+      }
+
+      const previousLeft =
+        getRuleValue(
+          rule,
+          index - 1
+        );
+
+      const previousRight =
+        getRightValue(
+          rule,
+          index - 1
+        );
+
+      return checkCrossover(
+        previousLeft,
+        currentLeft,
+        previousRight,
+        currentRight,
+        rule.condition
+      );
+    }
+
+
+    /*
+    Normal condition.
+    */
+
+    return checkNormalCondition(
+      currentLeft,
+      rule.condition,
+      currentRight
+    );
+  }
+
+
+  /*
+  ========================================================
+  BACKTEST LOOP
+  ========================================================
+  */
 
   for (
     let i = 0;
@@ -305,11 +562,13 @@ function runBacktest(
         marketData[i].close
       );
 
+
     const buySignal =
       evaluateRule(
         strategy.buyRule,
         i
       );
+
 
     const sellSignal =
       evaluateRule(
@@ -318,7 +577,11 @@ function runBacktest(
       );
 
 
-    // BUY
+    /*
+    ======================================================
+    BUY
+    ======================================================
+    */
 
     if (
       buySignal &&
@@ -351,7 +614,11 @@ function runBacktest(
     }
 
 
-    // SELL
+    /*
+    ======================================================
+    SELL
+    ======================================================
+    */
 
     else if (
       sellSignal &&
@@ -367,11 +634,13 @@ function runBacktest(
         ) *
         quantity;
 
+
       if (profitLoss >= 0) {
         winningTrades++;
       } else {
         losingTrades++;
       }
+
 
       trades.push({
         type: "SELL",
@@ -388,6 +657,7 @@ function runBacktest(
         index: i,
       });
 
+
       cash = saleValue;
 
       quantity = 0;
@@ -399,26 +669,89 @@ function runBacktest(
   }
 
 
+  /*
+  ========================================================
+  CLOSE OPEN POSITION
+  ========================================================
+  */
+
   let finalCapital = cash;
+
 
   if (
     hasPosition &&
     marketData.length > 0
   ) {
+    const lastIndex =
+      marketData.length - 1;
+
+
     const lastPrice =
       Number(
-        marketData[
-          marketData.length - 1
-        ].close
+        marketData[lastIndex].close
       );
 
-    finalCapital =
+
+    const saleValue =
       quantity * lastPrice;
+
+
+    const profitLoss =
+      (
+        lastPrice -
+        entryPrice
+      ) *
+      quantity;
+
+
+    if (profitLoss >= 0) {
+      winningTrades++;
+    } else {
+      losingTrades++;
+    }
+
+
+    trades.push({
+      type: "SELL",
+
+      date:
+        marketData[lastIndex].date,
+
+      price:
+        lastPrice,
+
+      quantity,
+
+      profitLoss,
+
+      index:
+        lastIndex,
+    });
+
+
+    finalCapital =
+      saleValue;
+
+    cash =
+      saleValue;
+
+    quantity = 0;
+
+    entryPrice = 0;
+
+    hasPosition = false;
   }
 
 
+  /*
+  ========================================================
+  FINAL RESULTS
+  ========================================================
+  */
+
   const profitLoss =
     finalCapital - capital;
+
 
   const returnPercentage =
     capital === 0
@@ -430,15 +763,40 @@ function runBacktest(
 
 
   return {
-    finalCapital,
+    initialCapital:
+      capital,
 
-    profitLoss,
+    finalCapital:
+      Number(
+        finalCapital.toFixed(2)
+      ),
 
-    returnPercentage,
+    /*
+    Keep finalValue because
+    your Dashboard may use this name.
+    */
+
+    finalValue:
+      Number(
+        finalCapital.toFixed(2)
+      ),
+
+    profitLoss:
+      Number(
+        profitLoss.toFixed(2)
+      ),
+
+    returnPercentage:
+      Number(
+        returnPercentage.toFixed(2)
+      ),
 
     winningTrades,
 
     losingTrades,
+
+    totalTrades:
+      trades.length,
 
     trades,
   };
