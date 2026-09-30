@@ -1,127 +1,148 @@
 # 📈 TradeLab
 
-### Trading Strategy Simulator | Learn • Build • Test • Analyse
+## Trading Strategy Simulator
 
 <p align="center">
-  <b>
-    A full-stack web application for creating, testing, and analysing
-    trading strategies using simulated market data.
-  </b>
+  <b>Simulate • Strategize • Backtest • Analyse • Learn</b>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/React-Frontend-61DAFB?style=for-the-badge&logo=react&logoColor=black" />
-  <img src="https://img.shields.io/badge/Vite-Build%20Tool-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
-  <img src="https://img.shields.io/badge/Node.js-Backend-339933?style=for-the-badge&logo=node.js&logoColor=white" />
-  <img src="https://img.shields.io/badge/Express.js-REST%20API-000000?style=for-the-badge&logo=express&logoColor=white" />
-  <img src="https://img.shields.io/badge/Firebase-Auth%20%26%20Database-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" />
-  <img src="https://img.shields.io/badge/Recharts-Data%20Visualization-8884D8?style=for-the-badge" />
+  A full-stack web application for creating, testing, visualizing and analysing
+  trading strategies using simulated market data.
 </p>
 
 <p align="center">
-  🌐 <b>Live Demo</b> • 💻 <b>GitHub Repository</b>
+
+![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-Frontend-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Node.js](https://img.shields.io/badge/Node.js-Backend-339933?style=for-the-badge&logo=node.js&logoColor=white)
+![Express](https://img.shields.io/badge/Express.js-REST_API-000000?style=for-the-badge&logo=express&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-Authentication_&_Firestore-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+![Recharts](https://img.shields.io/badge/Recharts-Data_Visualization-8884D8?style=for-the-badge)
+
+</p>
+
+<p align="center">
+
+🌐 **Live Demo:**  
+https://trading-simulator-flame.vercel.app/
+
+💻 **GitHub:**  
+https://github.com/abhilashaTech-ux/TradingSimulator
+
 </p>
 
 ---
 
-## 💡 About TradeLab
+# 📑 Table of Contents
 
-**TradeLab** is a full-stack trading strategy simulation platform developed during my internship at **ElevanceSkills**.
-
-The application provides an educational environment where users can create, customise, test, and analyse trading strategies using simulated market data without using real money.
-
-TradeLab combines:
-
-- 📊 Market data simulation
-- 📈 Technical indicators
-- ⚙️ Strategy building
-- 🧪 Backtesting
-- 💼 Portfolio simulation
-- 🕯️ Candlestick pattern recognition
-- 📊 Multi-asset visualization
-- 📈 Advanced analytics
-- 🔐 Firebase authentication
-- 💾 Firestore data persistence
-- 🔄 Live simulated market updates
-
-> ⚠️ **Note:** TradeLab uses randomly generated/simulated market data. It is intended for educational and experimental purposes only and does not execute real trades or provide financial advice.
-
----
-
-# ✨ Key Features
-
-## 🔐 1. Authentication & User Management
-
-TradeLab uses Firebase Authentication to provide user-specific access.
-
-### Features
-
-- 🔑 User registration
-- 🔓 User login
-- 🚪 User logout
-- 🔐 Firebase Authentication
-- 💾 User-specific data
-- ☁️ Firestore persistence
-- 📚 Saved backtest history
-
----
-
-# 📊 2. Simulated Market Data
-
-TradeLab generates simulated market data instead of connecting to real financial markets.
-
-The generated dataset contains:
-
-- Open price
-- High price
-- Low price
-- Close price
-- Volume
-- Date
-
-Users can generate a completely new simulated market dataset whenever required.
-
-### 🔄 Live Market Simulation
-
-TradeLab also supports continuously changing simulated prices.
-
-Users can:
-
-- ▶️ Start live updates
-- ⏸️ Pause live updates
-- 📈 Observe changing prices
-- 🟢 Monitor live simulation status
+- [About the Project](#-about-the-project)
+- [Project Objective](#-project-objective)
+- [Problem Statement](#-problem-statement)
+- [Project Workflow](#-project-workflow)
+- [System Architecture](#-system-architecture)
+- [Core Features](#-core-features)
+- [Market Data Simulation](#-market-data-simulation)
+- [Technical Indicators](#-technical-indicators)
+- [Strategy Builder](#-strategy-builder)
+- [Crossover Strategy](#-crossover-strategy)
+- [Backtesting Engine](#-backtesting-engine)
+- [Portfolio Simulation](#-portfolio-simulation)
+- [Candlestick Pattern Recognition](#-candlestick-pattern-recognition)
+- [Multi-Asset Visualization](#-multi-asset-visualization)
+- [Advanced Analytics](#-advanced-analytics)
+- [Live Market Simulation](#-live-market-simulation)
+- [Firebase Integration](#-firebase-integration)
+- [Frontend](#-frontend-architecture)
+- [Backend](#-backend-architecture)
+- [API](#-api-endpoints)
+- [Technology Stack](#-technology-stack)
+- [Development Tools](#-development-tools)
+- [Project Structure](#-project-structure)
+- [Application Flow](#-application-flow)
+- [Installation](#-installation)
+- [Running the Project](#-running-the-project)
+- [Production Build](#-production-build)
+- [Testing](#-testing)
+- [Challenges and Solutions](#-challenges-and-solutions)
+- [Security and Data Handling](#-security-and-data-handling)
+- [Project Limitations](#-project-limitations)
+- [Future Scope](#-future-scope)
+- [Learning Outcomes](#-learning-outcomes)
+- [Project Information](#-project-information)
+- [Project Links](#-project-links)
+- [Developer](#-developer)
+- [Disclaimer](#-disclaimer)
 
 ---
 
-# 📈 3. Technical Indicators
+# 💡 About the Project
 
-TradeLab provides multiple technical-analysis indicators.
+**TradeLab** is a full-stack trading strategy simulation platform developed as an internship project at **ElevanceSkills**.
 
-### Available Indicators
+The application provides an interactive environment where users can experiment with trading strategies without using real financial funds.
 
-| Indicator | Purpose |
-|---|---|
-| SMA 20 | Short-term moving average |
-| SMA 50 | Longer-term moving average |
-| EMA 20 | Exponential moving average |
-| RSI 14 | Momentum analysis |
-| Bollinger Bands | Price volatility and range analysis |
+Instead of connecting to real stock-market APIs, TradeLab generates **simulated OHLCV market data** and uses that data for technical analysis, strategy execution, backtesting and portfolio simulation.
 
-These indicators can be visualised directly on the trading chart.
+The application combines:
+
+- Frontend development
+- Backend development
+- REST API communication
+- Data visualization
+- Technical analysis
+- Trading strategy logic
+- Backtesting
+- Portfolio simulation
+- Firebase Authentication
+- Firestore persistence
+- Candlestick pattern recognition
+- Multi-asset visualization
+- Market analytics
 
 ---
 
-# ⚙️ 4. Strategy Builder
+# 🎯 Project Objective
 
-Users can create customised BUY and SELL trading rules.
+The main objective of TradeLab is to provide a practical learning environment for understanding how trading-analysis systems work.
 
-### Supported Conditions
+The project focuses on:
+
+- Creating simulated financial datasets
+- Applying technical indicators
+- Building customizable trading rules
+- Detecting indicator crossovers
+- Running trading strategy backtests
+- Calculating trading performance
+- Simulating portfolio transactions
+- Identifying candlestick patterns
+- Comparing multiple simulated assets
+- Analysing price trends and volatility
+- Persisting user-specific data
+- Connecting frontend and backend systems
+
+---
+
+# ❓ Problem Statement
+
+Understanding trading strategies theoretically can be difficult without a practical environment for experimentation.
+
+Real financial markets also involve financial risk, making them unsuitable for unrestricted experimentation.
+
+TradeLab addresses this problem by providing a **simulated trading environment** where users can:
 
 ```text
-Greater Than
-Less Than
-Greater Than or Equal
-Less Than or Equal
-Cross Above
-Cross Below
+Generate Data
+     ↓
+Analyse Market
+     ↓
+Create Strategy
+     ↓
+Generate BUY / SELL Signals
+     ↓
+Backtest Strategy
+     ↓
+Simulate Portfolio
+     ↓
+Analyse Performance
