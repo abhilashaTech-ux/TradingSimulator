@@ -1,127 +1,87 @@
 # 📈 TradeLab
-
-### Trading Strategy Simulator | Learn • Build • Test • Analyse
+### Intelligent Trading Strategy Simulator & Portfolio Analytics Platform
 
 <p align="center">
-  <b>
-    A full-stack web application for creating, testing, and analysing
-    trading strategies using simulated market data.
-  </b>
+  <strong>Build. Test. Analyse. Simulate.</strong>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/React-Frontend-61DAFB?style=for-the-badge&logo=react&logoColor=black" />
-  <img src="https://img.shields.io/badge/Vite-Build%20Tool-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
-  <img src="https://img.shields.io/badge/Node.js-Backend-339933?style=for-the-badge&logo=node.js&logoColor=white" />
-  <img src="https://img.shields.io/badge/Express.js-REST%20API-000000?style=for-the-badge&logo=express&logoColor=white" />
-  <img src="https://img.shields.io/badge/Firebase-Auth%20%26%20Database-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" />
-  <img src="https://img.shields.io/badge/Recharts-Data%20Visualization-8884D8?style=for-the-badge" />
+  A full-stack educational trading simulation platform built with React, Node.js, Express, Firebase and Recharts.
 </p>
 
 <p align="center">
-  🌐 <b>Live Demo</b> • 💻 <b>GitHub Repository</b>
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-black?style=for-the-badge&logo=vercel)](https://trading-simulator-flame.vercel.app/)
+
+[![GitHub](https://img.shields.io/badge/Source%20Code-GitHub-181717?style=for-the-badge&logo=github)](https://github.com/abhilashaTech-ux/TradingSimulator)
+
+[![React](https://img.shields.io/badge/React-18%2B-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+
+[![Node.js](https://img.shields.io/badge/Node.js-24%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+
+[![Express](https://img.shields.io/badge/Express.js-Backend-000000?style=for-the-badge&logo=express)](https://expressjs.com/)
+
+[![Firebase](https://img.shields.io/badge/Firebase-Auth%20%26%20Firestore-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
+
+[![Recharts](https://img.shields.io/badge/Recharts-Data%20Visualization-22B5BF?style=for-the-badge)](https://recharts.org/)
+
 </p>
 
 ---
 
-## 💡 About TradeLab
+# 🌐 Live Application
 
-**TradeLab** is a full-stack trading strategy simulation platform developed during my internship at **ElevanceSkills**.
+## 🚀 Try TradeLab
 
-The application provides an educational environment where users can create, customise, test, and analyse trading strategies using simulated market data without using real money.
+**Live Website:**
 
-TradeLab combines:
+https://trading-simulator-flame.vercel.app/
 
-- 📊 Market data simulation
-- 📈 Technical indicators
-- ⚙️ Strategy building
-- 🧪 Backtesting
-- 💼 Portfolio simulation
-- 🕯️ Candlestick pattern recognition
-- 📊 Multi-asset visualization
-- 📈 Advanced analytics
-- 🔐 Firebase authentication
-- 💾 Firestore data persistence
-- 🔄 Live simulated market updates
+**GitHub Repository:**
 
-> ⚠️ **Note:** TradeLab uses randomly generated/simulated market data. It is intended for educational and experimental purposes only and does not execute real trades or provide financial advice.
+https://github.com/abhilashaTech-ux/TradingSimulator
+
+**Backend API:**
+
+https://trading-simulator-backend-x6qz.onrender.com/
 
 ---
 
-# ✨ Key Features
+# 🧠 What is TradeLab?
 
-## 🔐 1. Authentication & User Management
+TradeLab is a **full-stack web-based trading strategy simulator** created for learning and experimentation with algorithmic trading concepts.
 
-TradeLab uses Firebase Authentication to provide user-specific access.
+Instead of simply displaying a stock chart, TradeLab provides an end-to-end simulation environment where a user can:
 
-### Features
+> Generate market data → Apply indicators → Build a strategy → Backtest it → Execute simulated trades → Analyse portfolio performance.
 
-- 🔑 User registration
-- 🔓 User login
-- 🚪 User logout
-- 🔐 Firebase Authentication
-- 💾 User-specific data
-- ☁️ Firestore persistence
-- 📚 Saved backtest history
+The platform combines technical analysis, strategy construction, historical backtesting, portfolio simulation and visual analytics inside a single dashboard.
 
 ---
 
-# 📊 2. Simulated Market Data
+# ✨ Why TradeLab?
 
-TradeLab generates simulated market data instead of connecting to real financial markets.
+Traditional beginner trading projects usually stop at displaying a price chart.
 
-The generated dataset contains:
-
-- Open price
-- High price
-- Low price
-- Close price
-- Volume
-- Date
-
-Users can generate a completely new simulated market dataset whenever required.
-
-### 🔄 Live Market Simulation
-
-TradeLab also supports continuously changing simulated prices.
-
-Users can:
-
-- ▶️ Start live updates
-- ⏸️ Pause live updates
-- 📈 Observe changing prices
-- 🟢 Monitor live simulation status
-
----
-
-# 📈 3. Technical Indicators
-
-TradeLab provides multiple technical-analysis indicators.
-
-### Available Indicators
-
-| Indicator | Purpose |
-|---|---|
-| SMA 20 | Short-term moving average |
-| SMA 50 | Longer-term moving average |
-| EMA 20 | Exponential moving average |
-| RSI 14 | Momentum analysis |
-| Bollinger Bands | Price volatility and range analysis |
-
-These indicators can be visualised directly on the trading chart.
-
----
-
-# ⚙️ 4. Strategy Builder
-
-Users can create customised BUY and SELL trading rules.
-
-### Supported Conditions
+TradeLab goes further.
 
 ```text
-Greater Than
-Less Than
-Greater Than or Equal
-Less Than or Equal
-Cross Above
-Cross Below
+                         TRADELAB
+                            │
+        ┌───────────────────┼───────────────────┐
+        │                   │                   │
+        ▼                   ▼                   ▼
+   MARKET DATA         STRATEGY LAB        ANALYTICS
+        │                   │                   │
+        ▼                   ▼                   ▼
+   Indicators          BUY / SELL          Performance
+        │                Rules                 │
+        └──────────────────┼───────────────────┘
+                           ▼
+                       BACKTEST
+                           │
+                           ▼
+                       PORTFOLIO
+                           │
+                           ▼
+                    TRADING INSIGHTS
