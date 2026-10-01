@@ -9,7 +9,28 @@
 A full-stack educational trading simulation platform that allows users to experiment with technical indicators, trading strategies, portfolio management, candlestick patterns, multi-asset analysis and financial analytics using randomly generated market data.
 
 </p>
+## 🌐 Project Snapshot
 
+| Category | Details |
+|---|---|
+| Project Name | TradeLab |
+| Project Type | Full-Stack Web Application |
+| Domain | FinTech / Trading Simulation |
+| Frontend | React + Vite |
+| Backend | Node.js + Express |
+| Database | Firebase Firestore |
+| Authentication | Firebase Authentication |
+| Data Visualization | Recharts |
+| Programming Language | JavaScript |
+| Version Control | Git + GitHub |
+| Frontend Deployment | Vercel |
+| Backend Deployment | Render |
+| Market Data | Simulated / Randomly Generated |
+| Trading Type | Paper / Simulated Trading |
+| Initial Capital | 10,000 |
+| Transaction Fee | 0.10% |
+
+---
 ---
 
 # 🌐 Live Project
@@ -30,52 +51,7 @@ https://trading-simulator-backend-x6qz.onrender.com/
 
 ---
 
-# 📑 Table of Contents
 
-- [About TradeLab](#-about-tradelab)
-- [Project Overview](#-project-overview)
-- [Problem Statement](#-problem-statement)
-- [Project Objectives](#-project-objectives)
-- [Six Internship Tasks](#-six-internship-tasks)
-  - [Task 1 - Trading Strategy Simulator](#task-1---trading-strategy-simulator)
-  - [Task 2 - Authentication and Data Persistence](#task-2---authentication-and-data-persistence)
-  - [Task 3 - Multi-Asset Chart](#task-3---multi-asset-chart)
-  - [Task 4 - Candlestick Pattern Recognition](#task-4---candlestick-pattern-recognition)
-  - [Task 5 - Advanced Portfolio Simulation](#task-5---advanced-portfolio-simulation)
-  - [Task 6 - Advanced Data Analytics Dashboard](#task-6---advanced-data-analytics-dashboard)
-- [Complete Application Workflow](#-complete-application-workflow)
-- [System Architecture](#-system-architecture)
-- [Market Data Simulation](#-market-data-simulation)
-- [Technical Indicators](#-technical-indicators)
-- [Strategy and Crossover Logic](#-strategy-and-crossover-logic)
-- [Backtesting Engine](#-backtesting-engine)
-- [Portfolio Management](#-portfolio-management)
-- [Candlestick Analysis](#-candlestick-analysis)
-- [Multi-Asset Analysis](#-multi-asset-analysis)
-- [Advanced Analytics](#-advanced-analytics)
-- [Live Market Simulation](#-live-market-simulation)
-- [Firebase Integration](#-firebase-integration)
-- [Frontend Architecture](#-frontend-architecture)
-- [Backend Architecture](#-backend-architecture)
-- [API](#-api)
-- [Project Structure](#-project-structure)
-- [Technology Stack](#-technology-stack)
-- [Development Tools](#-development-tools)
-- [Installation](#-installation)
-- [Running the Project](#-running-the-project)
-- [Production Build](#-production-build)
-- [Testing](#-testing)
-- [Challenges and Solutions](#-challenges-and-solutions)
-- [Security and Data Handling](#-security-and-data-handling)
-- [Project Limitations](#-project-limitations)
-- [Future Scope](#-future-scope)
-- [Learning Outcomes](#-learning-outcomes)
-- [Internship Task Mapping](#-internship-task-mapping)
-- [Project Screenshots](#-project-screenshots)
-- [Deployment](#-deployment)
-- [Project Information](#-project-information)
-- [Developer](#-developer)
-- [Disclaimer](#-disclaimer)
 
 ---
 
